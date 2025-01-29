@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "pvH2od7CE6RoT5vLhz2m6Ryp9X0Ts6822LPLjg5y4so=",
+  "Source": "EventRouterApi",
+  "BasePath": "_content/EventRouterApi",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
