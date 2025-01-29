@@ -5,18 +5,16 @@ namespace EventRouterApi.Services;
 
 public class EventRouterService
 {
-    private readonly ConcurrentBag<Action<Event>> _listeners = new();
+    private readonly ConcurrentBag<Func<Event, Task>> _listeners = new();
 
-    public void RegisterListener(Action<Event> listener)
+    public void RegisterListener(Func<Event, Task> listener)
     {
         _listeners.Add(listener);
     }
 
-    public void DispatchEvent(Event evnt)
+    public async Task DispatchEventAsync(Event evnt)
     {
-        Parallel.ForEach(_listeners, listener =>
-        {
-            listener(evnt);
-        });
+        var tasks = _listeners.Select(listener => Task.Run(() => listener(evnt)));
+        await Task.WhenAll(tasks);
     }
 }

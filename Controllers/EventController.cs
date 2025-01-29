@@ -14,17 +14,18 @@ public class EventController : ControllerBase
     {
         _eventRouterService = eventRouterService;
 
-        // Register a sample listener
-        _eventRouterService.RegisterListener(evnt =>
+        // Register an async event listener
+        _eventRouterService.RegisterListener(async evnt =>
         {
-            Console.WriteLine($"Received event: {evnt.Type} - {evnt.Payload}");
+            await Task.Delay(500); // Simulate async processing
+            Console.WriteLine($"[ASYNC] Processed event: {evnt.Type} - {evnt.Payload}");
         });
     }
 
     [HttpPost("publish")]
-    public IActionResult PublishEvent([FromBody] Event evnt)
+    public async Task<IActionResult> PublishEvent([FromBody] Event evnt)
     {
-        _eventRouterService.DispatchEvent(evnt);
-        return Ok(new { message = "Event dispatched", evnt.Type });
+        await _eventRouterService.DispatchEventAsync(evnt);
+        return Ok(new { message = "Event dispatched asynchronously", evnt.Type });
     }
 }
