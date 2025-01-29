@@ -13,6 +13,12 @@ public class EventController : ControllerBase
     public EventController(EventRouterService eventRouterService)
     {
         _eventRouterService = eventRouterService;
+
+        // Register a sample listener
+        _eventRouterService.RegisterListener(evnt =>
+        {
+            Console.WriteLine($"Received event: {evnt.Type} - {evnt.Payload}");
+        });
     }
 
     [HttpPost("publish")]

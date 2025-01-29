@@ -1,10 +1,11 @@
+using System.Collections.Concurrent;
 using EventRouterApi.Models;
 
 namespace EventRouterApi.Services;
 
 public class EventRouterService
 {
-    private readonly List<Action<Event>> _listeners = new();
+    private readonly ConcurrentBag<Action<Event>> _listeners = new();
 
     public void RegisterListener(Action<Event> listener)
     {
@@ -13,9 +14,9 @@ public class EventRouterService
 
     public void DispatchEvent(Event evnt)
     {
-        foreach (var listener in _listeners)
+        Parallel.ForEach(_listeners, listener =>
         {
             listener(evnt);
-        }
+        });
     }
 }
