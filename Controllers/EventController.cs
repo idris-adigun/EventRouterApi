@@ -17,7 +17,7 @@ public class EventController : ControllerBase
         // Register an async event listener
         _eventRouterService.RegisterListener(async evnt =>
         {
-            await Task.Delay(500); // Simulate async processing
+            await Task.Delay(500); // Simulate async work
             Console.WriteLine($"[ASYNC] Processed event: {evnt.Type} - {evnt.Payload}");
         });
     }
@@ -25,7 +25,7 @@ public class EventController : ControllerBase
     [HttpPost("publish")]
     public async Task<IActionResult> PublishEvent([FromBody] Event evnt)
     {
-        await _eventRouterService.DispatchEventAsync(evnt);
-        return Ok(new { message = "Event dispatched asynchronously", evnt.Type });
+        await _eventRouterService.QueueEventAsync(evnt);
+        return Accepted(new { message = "Event queued for processing", evnt.Type });
     }
 }
