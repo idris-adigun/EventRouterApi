@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EventRouterApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+671cf38dcab1360daa0fbd5210ce283ded0f1735")]
 [assembly: System.Reflection.AssemblyProductAttribute("EventRouterApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EventRouterApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
